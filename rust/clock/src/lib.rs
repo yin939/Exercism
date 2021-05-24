@@ -7,9 +7,18 @@ pub struct Clock {
 const DAY_MINS: i32 = 24 * 60;
 
 fn helper(all_mins: i32) -> (i32, i32) {
-    match all_mins {
-        all_mins if all_mins < 0 => ((DAY_MINS + all_mins) / 60 % 24, (DAY_MINS + all_mins) % 60),
-        all_mins => (all_mins / 60 % 24, all_mins % 60),
+    // div_euclid 欧几里得算法 除法
+    // rem_euclid 欧几里得算法 取模
+    if all_mins < 0 {
+        return (
+            (DAY_MINS + all_mins).div_euclid(60).rem_euclid(24),
+            (DAY_MINS + all_mins).rem_euclid(60),
+        );
+    } else {
+        return (
+            all_mins.div_euclid(60).rem_euclid(24),
+            all_mins.rem_euclid(60),
+        );
     }
 }
 
