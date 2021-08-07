@@ -20,8 +20,6 @@ def encode(string: str):
 
     return ans
 
-
-
 def decode(string: str):
     ans: str = ""
     count: str = ""
