@@ -18,14 +18,12 @@ pub enum Allergen {
 
 impl Allergies {
     pub fn new(score: u32) -> Self {
-        let mut score = score;
-        while score > 2_u32.pow(8) {
-            score -= 2_u32.pow(8);
-        }
+        let score = score % 256;
         let mut allergies = HashSet::new();
-        for i in (0..=7).rev() {
+
+        for i in 0..=7 {
             let temp = 2_u32.pow(i);
-            if score.checked_sub(temp).is_some() {
+            if score & temp > 0 {
                 let allergen = match temp {
                     1 => Allergen::Eggs,
                     2 => Allergen::Peanuts,
@@ -38,7 +36,6 @@ impl Allergies {
                     _ => Allergen::Eggs,
                 };
                 allergies.insert(allergen);
-                score -= temp;
             }
         }
 
