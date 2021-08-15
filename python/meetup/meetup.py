@@ -1,5 +1,5 @@
-from datetime import date
 import calendar
+from datetime import date
 
 
 class MeetupDayException(Exception):
@@ -10,6 +10,7 @@ def meetup(year: int, month: int, week: str, day_of_week: str) -> date:
     date_index = list(calendar.day_name).index(day_of_week)
 
     # If the week is "teenth", iterate through dates 13 to 19
+    # 看了半天, 我也不是很懂 "teenth" 的意思...
     if week == "teenth":
         for i in range(13, 20):
             if calendar.weekday(year, month, i) == date_index:
