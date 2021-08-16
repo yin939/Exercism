@@ -7,8 +7,7 @@ def rotate(text: str, key: int) -> str:
         if c.isalpha():
             if c == c.lower():
                 text[i] = al[(al.index(c) + key )% 26]
-
-            if c == c.upper():
+            elif c == c.upper():
                 text[i] = au[(au.index(c) + key) % 26]
 
     return "".join(text)
