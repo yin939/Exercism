@@ -24,7 +24,8 @@ impl Player {
     pub fn cast_spell(&mut self, mana_cost: u32) -> u32 {
         match self.mana {
             None => {
-                self.health -= mana_cost;
+                // 饱和运算,取边界 
+                self.health = self.health.saturating_sub(mana_cost);
                 0
             }
             Some(mana) => {
