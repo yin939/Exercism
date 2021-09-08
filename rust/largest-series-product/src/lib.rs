@@ -11,15 +11,11 @@ pub fn lsp(string_digits: &str, span: usize) -> Result<u64, Error> {
     if span > string_digits.len() {
         return Err(Error::SpanTooLong);
     }
-    if string_digits.chars().any(|f| !f.is_ascii_digit()) {
-        return Err(Error::InvalidDigit(
-            string_digits
-                .chars()
-                .filter(|predicate| !predicate.is_ascii_digit())
-                .take(1)
-                .next()
-                .unwrap(),
-        ));
+    if let Some(x) = string_digits
+        .chars()
+        .find(|predicate| !predicate.is_ascii_digit())
+    {
+        return Err(Error::InvalidDigit(x));
     }
     let a = string_digits
         .chars()
